@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link href="css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css">
+  <!--Import main.css-->
+  <link href="css/main.css" media="screen,projection" rel="stylesheet" type="text/css">
+  <!--Let browser know website is optimized for mobile-->
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <!--Characterset-->
+  <meta charset="UTF-8">
+  <title>
+    Welcome | myExperience
+  </title>
+</head>
+
+<body id="itemsPage" class="background-images">
+
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">RateIt</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a class="waves-effect waves-light btn" href="php/signout.php">Sign out</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="valign-wrapper start-valign">
+    <div class="valign" style="width:100%;">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m6 offset-m3">
+            <div>
+              <button data-target="itemModal" class="waves-effect waves-light btn top-table add-btn">Add Item</button>
+              <button data-target="editTableModal" class="waves-effect waves-light btn top-table right add-btn red lighten-2">Edit Table</button>
+            </div>
+            <div id="tableContainer">
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="editRowModal" class="modal item-modal">
+    <form action="php/editItem.php" method="post">
+      <div id="editRowContainer" class="modal-content">
+
+      </div>
+      <div class="modal-footer">
+        <button id="editBtn" class="btn waves-effect waves-light start-btn" type="submit" name="action">Edit</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="itemModal" class="modal item-modal">
+    <form action="php/addItem.php" method="post">
+      <div id="addItemContainer" class="modal-content">
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn waves-effect waves-light start-btn" type="submit" name="action">Add</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="editTableModal" class="modal item-modal">
+    <form action="php/addColumn.php" method="post">
+      <div id="editTableContainer" class="modal-content">
+        <h4>Edit Table</h4>
+        <div class="row">
+          <div class="input-field col s11 m11 l11">
+            <input id="numberOfColumns" type="number" min="1" max="8" class="validate">
+            <label for="numberOfColumns" data-error="Only numbers between 1 and 8" data-success="You did it!">Number of new columns</label>
+          </div>
+          <div class="col s1">
+            <a id="newColumnsButton" class="btn waves-effect waves-light aligned-btn"><i class="material-icons">add</i></a>
+          </div>
+        </div>
+        <div id="addColumnContainer">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn waves-effect waves-light start-btn" type="submit" name="action">Add</button>
+      </div>
+    </form>
+  </div>
+
+
+
+
+  <script id="addItemTemplate" type="text/x-handlebars-template">
+    <h4>Add Item</h4>
+    <div class="row">
+      {{#each headers}} {{#if_eq headername 'rating'}}
+      <div class="input-field col s6 m6 l6">
+        <input id="{{headername}}" type="number" min="1" max="5" name="Item[{{headername}}]" class="validate">
+        <label for="{{headername}}" data-error="Only numbers between 1 and 5" data-success="You did it!">{{headername}}</label>
+      </div>
+      {{else}}
+      <div class="input-field col s6 m6 l6">
+        <input id="{{headername}}" type="text" name="Item[{{headername}}]" class="validate">
+        <label for="{{headername}}">{{headername}}</label>
+      </div>
+      {{/if_eq}} {{/each}}
+    </div>
+  </script>
+
+
+  <script id="itemTemplate" type="text/x-handlebars-template">
+    <table id="table" class="bordered highlight centered">
+      <thead>
+        <tr>
+          {{#each headers}}
+          <th>{{headername}}</th>
+          {{/each}}
+        </tr>
+      </thead>
+      <tbody>
+        {{#each tableContent}} {{#each this}}
+        <tr>
+          {{#each this}} {{#if @first}}
+          <td style="display:none">{{itemid}}</td>
+          <td>{{tablevalue}}</td>
+          {{/if}} {{#unless @first}}
+          <td>{{tablevalue}}</td>
+          {{/unless}} {{/each}}
+          <td><a data-target="editRowModal" class="btn waves-effect waves-light table-edit-btn"><i class="material-icons">mode_edit</i></a></td>
+          <td><a class="btn waves-effect waves-light table-delete-btn"><i class="material-icons">delete</i></a></td>
+        </tr>
+        {{/each}} {{/each}}
+      </tbody>
+    </table>
+  </script>
+
+
+  <script id="addColumnTemplate" type="text/x-handlebars-template">
+    {{#each columnNumber}}
+    <div class="row">
+      <div class="input-field col s12 m12 l12">
+        <input id="column{{this}}" name="Column[]" type="text" class="validate">
+        <label for="column{{this}}">Column name</label>
+      </div>
+    </div>
+    {{/each}}
+  </script>
+
+  <script id="editItemTemplate" type="text/x-handlebars-template">
+    <h4>Edit Item</h4>
+    {{#each item}}
+    {{#if @last}}
+    <div class="row hide">
+      <div class="input-field col s12">
+        <input value="{{itemid}}" placeholder="{{itemid}}" id="row{{itemid}}" type="text" name="Row[itemid]" class="validate">
+        <label for="row{{itemid}}" class="active">{{itemid}}</label>
+      </div>
+    </div>
+    {{/if}}
+    {{#unless @last}}
+    {{#if_eq header 'rating'}}
+    <div class="row">
+      <div class="input-field col s12">
+        <input value="{{value}}" placeholder="{{value}}/5" id="row{{value}}" type="number" min="1" max="5" name="Row[{{header}}]" class="validate">
+        <label for="row{{value}}" data-error="Only numbers between 1 and 5" data-success="You did it!" class="active">{{header}}</label>
+      </div>
+    </div>
+    {{else}}
+    <div class="row">
+      <div class="input-field col s12">
+        <input value="{{value}}" placeholder="{{value}}" id="row{{value}}" type="text" name="Row[{{header}}]" class="validate">
+        <label for="row{{value}}" class="active">{{header}}</label>
+      </div>
+    </div>
+    {{/if_eq}}
+    {{/unless}}
+    {{/each}}
+  </script>
+
+
+
+  <!--Import jQuery before materialize.js-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+  <script src="js/materialize.js" type="text/javascript"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
+  <script src="js/myjs/loadItems.js" type="text/javascript"></script>
+  <script src="js/myjs/addColumn.js" type="text/javascript"></script>
+  <script src="js/myjs/editRow.js" type="text/javascript"></script>
+
+</body>
+
+</html>

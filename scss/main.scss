@@ -1,0 +1,113 @@
+@import "backgroundImages";
+
+body {
+  overflow-x: hidden;
+}
+
+.card {
+  background-color: rgba(255,255,255, 0.9);
+}
+
+.start-btn {
+  width: 100%;
+}
+
+.start-valign {
+  width: 100vw;
+  padding-top: 5em;
+  position: absolute;
+}
+
+.btn-welcome-page {
+  width: 30%;
+
+  :nth-child(2) {
+    margin-top: 10px;
+  }
+}
+
+table {
+  thead {
+    background-color: rgba(227,227,227,0.95);
+  }
+
+  th {
+    border-radius: 0 !important;
+  }
+
+  tbody tr:last-child {
+    border-bottom: none;
+  }
+  background-color: rgba(255,255,255,0.95);
+  border-bottom-right-radius: 5px;
+
+  .btn{
+    padding-top: 0px;
+    padding-right: 1.5rem;
+    padding-bottom: 0px;
+    padding-left: 1.5rem;
+  }
+
+
+}
+
+.add-btn {
+  width: 100%;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.datepicker {
+  cursor: pointer;
+}
+
+th::first-letter {
+  text-transform: capitalize;
+}
+
+.last-p-tag {
+  padding-bottom: 1em;
+}
+
+.category-modal {
+  width: 20% !important;
+  min-width: 300px;
+}
+/* increase the width as per you desire */
+
+.item-modal {
+  h4 {
+    text-align: center;
+  }
+
+  label::first-letter {
+    text-transform: capitalize;
+  }
+}
+
+.top-table {
+  width: 50%;
+  &:first-child{
+    border-top-left-radius: 5px;
+  }
+  &:last-child{
+    border-top-right-radius: 5px;
+  }
+  .right {
+    width: 50%;
+    float: right;
+  }
+}
+
+.container {
+  max-width: none;
+  width: 100%;
+}
+
+.aligned-btn {
+  margin-top: 1em;
+  padding: 0 1rem;
+}
+.capitalize-first::first-letter {
+  text-transform: capitalize;
+}

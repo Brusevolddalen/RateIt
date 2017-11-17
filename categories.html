@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link href="css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css">
+  <!--Import main.css-->
+  <link href="css/main.css" media="screen,projection" rel="stylesheet" type="text/css">
+  <!--Let browser know website is optimized for mobile-->
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <!--Characterset-->
+  <meta charset="UTF-8">
+  <title>
+    Welcome | myExperience
+  </title>
+</head>
+
+<body id="categoryPage" class="background-images">
+
+  <!--
+  <nav>
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="#!" class="breadcrumb">Categories</a>
+        <a href="#!" class="breadcrumb">Products</a>
+      </div>
+    </div>
+  </nav>
+-->
+
+  <div class="navbar-fixed">
+    <nav class="red lighten-2  ">
+      <div class="nav-wrapper container">
+        <a href="#" class="brand-logo">RateIt</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a class="waves-effect waves-light btn" href="php/signout.php">Sign out</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+
+  <div class="valign-wrapper start-valign">
+    <div class="valign" style="width:100%;">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m6 offset-m3">
+            <button data-target="categoryModal" class="waves-effect waves-light btn add-btn">Add Category</button>
+            <!--<a id="addCategory" class="waves-effect waves-light btn add-btn">Add Category</a>-->
+            <div id="tableContainer">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script id="categoryTemplate" type="text/x-handlebars-template">
+    <table id="table" class="bordered highlight centered category-table">
+      <thead>
+        <tr>
+          <th>Categories</th>
+          <!--<th># Items in category</th>-->
+          <!--<th>Last edited</th>-->
+        </tr>
+      </thead>
+      <tbody>
+        {{#categories}}
+        <tr>
+          <td class="capitalize-first">{{categoryName}}</td>
+          <!--<td>10</td>-->
+          <!--<td>25.02.2017</td>-->
+        </tr>
+        {{/categories}}
+      </tbody>
+    </table>
+  </script>
+
+
+  <div id="categoryModal" class="modal category-modal">
+    <form action="php/addCategory.php" method="post">
+      <div class="modal-content">
+        <h4>Add Category</h4>
+        <div class="row">
+          <div class="input-field">
+            <input type="text" name="categoryName" class="validate" required="" aria-required="true">
+            <label for="categoryName">Category name</label>
+          </div>
+        </div>
+        <div class="col s5">
+          <button class="btn waves-effect waves-light start-btn" type="submit" name="action">Add</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!--Import jQuery before materialize.js-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+  <script src="js/materialize.js" type="text/javascript"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
+  <script src="js/myjs/loadCategories.js" type="text/javascript"></script>
+  <script src="js/myjs/selectFromTable.js" type="text/javascript"></script>
+  <script src="js/myjs/addCategory.js" type="text/javascript"></script>
+
+</body>
+
+</html>

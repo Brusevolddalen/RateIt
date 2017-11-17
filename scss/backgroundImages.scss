@@ -1,0 +1,22 @@
+#registerPage {
+  background-image: url("../backgroundimages/register.jpg");
+}
+
+#welcomePage {
+  background-image: url("../backgroundimages/login.jpg");
+}
+#loginPage {
+  background-image: url("../backgroundimages/login.jpg");
+}
+#categoryPage {
+  background-image: url("../backgroundimages/category.jpg");
+}
+#itemsPage {
+  background-image: url("../backgroundimages/category.jpg");
+}
+.background-images{
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  //width:100%;
+  //background-size: cover;
+}
